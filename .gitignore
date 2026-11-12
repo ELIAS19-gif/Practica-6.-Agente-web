@@ -1,0 +1,5 @@
+node_modules/
+ai-backend/.env
+ai-backend/data/
+tmp/
+*.log

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#153c34">
+  <title>Agente IA · Práctica 6</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Inicio"><span class="brand-icon">✳</span> agente<span class="brand-light">/ IA</span></a>
+    <button id="newChat" class="new-chat" type="button"><span>＋</span> Nueva conversación</button>
+    <div class="sidebar-label">TU ESPACIO DE TRABAJO</div>
+    <div class="active-chat"><span>◌</span> Asistente personal <span class="active-dot"></span></div>
+    <div class="sidebar-bottom"><span class="project-badge">06</span><div>Práctica 6<small>Integración de un agente IA</small></div></div>
+  </aside>
+  <main>
+    <header class="topbar"><div><span class="topbar-title">Asistente personal</span><span class="divider">/</span><span class="subtle">Conversación</span></div><span class="provider">↗ OpenRouter</span></header>
+    <section class="chat-layout">
+      <div class="chat-heading"><div><div class="eyebrow">UN ESPACIO PARA TUS IDEAS</div><h1>Pensemos juntos.</h1><p>Pregunta, explora y dale forma a tu siguiente idea.</p></div><span class="assistant-mark" aria-hidden="true">✳</span></div>
+      <div id="status" class="status" role="status">Conectando con el servidor…</div>
+      <div id="chatBox" class="chat-box" role="log" aria-label="Conversación" aria-live="polite">
+        <div id="welcome" class="welcome"><span class="welcome-icon">✳</span><h2>¿Qué tienes en mente?</h2><p>Estoy aquí para ayudarte a aprender, crear y resolver dudas.<br>Elige una idea o escribe tu primera pregunta.</p><div class="suggestions"><button type="button" data-prompt="Explícame cómo funciona una API con un ejemplo sencillo."><span>↗</span> Entender un concepto</button><button type="button" data-prompt="Ayúdame a generar ideas para un proyecto web."><span>✧</span> Explorar una idea</button><button type="button" data-prompt="¿Cómo puedo organizar mejor mis tareas de estudio?"><span>≡</span> Crear un plan</button></div></div>
+      </div>
+      <div id="error" class="error" role="alert" hidden></div>
+      <form id="chatForm" class="composer"><label class="sr-only" for="userInput">Tu mensaje</label><textarea id="userInput" rows="2" maxlength="4000" placeholder="Escribe tu mensaje aquí…" required></textarea><div class="composer-bottom"><label class="stream-toggle"><input id="streamMode" type="checkbox" checked> Respuesta en tiempo real</label><button id="sendButton" type="submit">Enviar <span>↑</span></button></div></form>
+      <footer><span>La IA puede cometer errores. Revisa la información importante.</span><span id="modelName">gpt-4o-mini</span></footer>
+    </section>
+  </main>
+</body>
+</html>
