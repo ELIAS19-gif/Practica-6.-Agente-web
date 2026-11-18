@@ -1,5 +1,15 @@
 # Practica 6. Agente web
 
+## Agente conectado a Sakila (MySQL de Laragon)
+
+Pregunta en español sobre la videoteca. El modelo usa `consultar_sakila`; el backend ejecuta consultas preparadas en MySQL y devuelve los resultados al modelo para redactar la respuesta. Se mantienen JSON, streaming e historial en SQLite.
+
+Operaciones: resumen; películas por título o categoría; actores por nombre o película; categorías; películas más alquiladas; ingresos por mes histórico; copias de inventario por tienda; conteos de clientes y clientes activos por tienda. Ejemplos: «¿Cuántas películas hay?», «Muéstrame las cinco películas más alquiladas», «¿Cuántos clientes hay por tienda?» o «¿Qué actores aparecen en ACADEMY DINOSAUR?».
+
+Para otro equipo, importa Sakila en MySQL, crea una cuenta con **solo SELECT** sobre `film`, `actor`, `category`, `film_category`, `film_actor`, `rental`, `payment` e `inventory`, y SELECT únicamente sobre las columnas `store_id` y `active` de `customer`. Configura `SAKILA_ENABLED=true`, `SAKILA_HOST`, `SAKILA_PORT`, `SAKILA_USER` y `SAKILA_PASSWORD` en `ai-backend/.env` (ver `.env.example`). La aplicación rechaza el usuario `root`. Ejecuta `npm.cmd install` y `npm.cmd start` con MySQL de Laragon encendido. `GET /api/database` y la interfaz muestran el estado de conexión.
+
+En este equipo ya está configurada la cuenta local `sakila_agent`. Las credenciales están únicamente en `.env`, excluido de Git. Las consultas usan parámetros, transacciones de solo lectura, máximo 20 filas y hasta tres herramientas por turno. No se ejecuta SQL libre ni se consultan contraseñas de personal o datos de contacto de clientes. Los resultados del catálogo y agregados se envían a OpenRouter para generar la respuesta. Las listas pueden estar limitadas; el inventario cuenta copias totales, sin garantizar disponibilidad de alquiler. Los ingresos corresponden al conjunto histórico de muestra.
+
 Aplicación de chat de acuerdo con la práctica: backend Node.js/Express, frontend HTML/CSS/JavaScript y SDK de OpenAI conectado a **OpenRouter**. Modelo configurado: `openai/gpt-4o-mini`.
 
 ## Ejecutar

@@ -17,12 +17,12 @@
     <div class="sidebar-bottom"><span class="project-badge">06</span><div>Práctica 6<small>Integración de un agente IA</small></div></div>
   </aside>
   <main>
-    <header class="topbar"><div><span class="topbar-title">Asistente personal</span><span class="divider">/</span><span class="subtle">Conversación</span></div><span class="provider">↗ OpenRouter</span></header>
+    <header class="topbar"><div><span class="topbar-title">Asistente de Sakila</span><span class="divider">/</span><span class="subtle">Videoteca</span></div><span class="provider">↗ OpenRouter + MySQL</span></header>
     <section class="chat-layout">
-      <div class="chat-heading"><div><div class="eyebrow">UN ESPACIO PARA TUS IDEAS</div><h1>Pensemos juntos.</h1><p>Pregunta, explora y dale forma a tu siguiente idea.</p></div><span class="assistant-mark" aria-hidden="true">✳</span></div>
+      <div class="chat-heading"><div><div class="eyebrow">TU VIDEOTECA, EN UNA CONVERSACIÓN</div><h1>Exploremos Sakila.</h1><p>Consulta películas, actores y alquileres con lenguaje natural.</p></div><span class="assistant-mark" aria-hidden="true">✳</span></div>
       <div id="status" class="status" role="status">Conectando con el servidor…</div>
       <div id="chatBox" class="chat-box" role="log" aria-label="Conversación" aria-live="polite">
-        <div id="welcome" class="welcome"><span class="welcome-icon">✳</span><h2>¿Qué tienes en mente?</h2><p>Estoy aquí para ayudarte a aprender, crear y resolver dudas.<br>Elige una idea o escribe tu primera pregunta.</p><div class="suggestions"><button type="button" data-prompt="Explícame cómo funciona una API con un ejemplo sencillo."><span>↗</span> Entender un concepto</button><button type="button" data-prompt="Ayúdame a generar ideas para un proyecto web."><span>✧</span> Explorar una idea</button><button type="button" data-prompt="¿Cómo puedo organizar mejor mis tareas de estudio?"><span>≡</span> Crear un plan</button></div></div>
+        <div id="welcome" class="welcome"><span class="welcome-icon">✳</span><h2>¿Qué quieres descubrir?</h2><p>Pregúntame sobre los datos de Sakila.<br>Consulto MySQL para responder con resultados reales.</p><div class="suggestions"><button type="button" data-prompt="¿Cuántas películas y actores hay en Sakila?"><span>↗</span> Resumen de Sakila</button><button type="button" data-prompt="Muéstrame las 5 películas más alquiladas."><span>✧</span> Más alquiladas</button><button type="button" data-prompt="Recomiéndame 5 películas de la categoría Action del catálogo."><span>≡</span> Explorar películas</button></div></div>
       </div>
       <div id="error" class="error" role="alert" hidden></div>
       <form id="chatForm" class="composer"><label class="sr-only" for="userInput">Tu mensaje</label><textarea id="userInput" rows="2" maxlength="4000" placeholder="Escribe tu mensaje aquí…" required></textarea><div class="composer-bottom"><label class="stream-toggle"><input id="streamMode" type="checkbox" checked> Respuesta en tiempo real</label><button id="sendButton" type="submit">Enviar <span>↑</span></button></div></form>

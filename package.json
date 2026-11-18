@@ -7,11 +7,14 @@
     "dev": "node --watch ai-backend/server.js",
     "test": "node --test tests/*.test.js"
   },
-  "engines": { "node": ">=22.13.0" },
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "mysql2": "^3.24.6",
     "openai": "^4.85.1"
   }
 }

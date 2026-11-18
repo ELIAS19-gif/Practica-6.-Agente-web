@@ -117,6 +117,12 @@ async function initialize() {
     $('modelName').textContent = health.model;
     $('status').textContent = health.configured ? '● Asistente conectado · Historial guardado en este equipo' : '○ Conexión pendiente · Configura tu clave de OpenRouter para comenzar';
     $('status').classList.toggle('pending', !health.configured);
+    try {
+      const database = await request('/api/database');
+      const databaseStatus = database.connected ? ' · Sakila conectada (solo lectura)' : ' · Sakila sin conexión: inicia MySQL en Laragon';
+      $('status').textContent += databaseStatus;
+      if (!database.connected) $('status').classList.add('pending');
+    } catch { $('status').textContent += ' · No se pudo comprobar Sakila'; }
     await loadHistory();
   } catch { $('status').textContent = 'No se pudo conectar con el servidor.'; }
   finally { setBusy(false); }

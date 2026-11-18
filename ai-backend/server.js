@@ -6,8 +6,9 @@ const { randomBytes } = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
+const { createSakila, prepareAnswer } = require('./sakila');
 
-function createApp({ client, databasePath, configured } = {}) {
+function createApp({ client, databasePath, configured, sakila = createSakila() } = {}) {
   const app = express();
   const key = process.env.OPENROUTER_API_KEY?.trim();
   const ready = configured ?? Boolean(key);
@@ -41,6 +42,10 @@ function createApp({ client, databasePath, configured } = {}) {
   });
   app.use(express.json({ limit: '16kb' }));
   app.get('/api/health', (req, res) => res.json({ configured: ready, model }));
+  app.get('/api/database', async (req, res) => {
+    try { res.json(sakila ? await sakila.health() : { configured: false, connected: false, database: 'sakila' }); }
+    catch { res.json({ configured: true, connected: false, database: 'sakila' }); }
+  });
   app.use('/api', (req, res, next) => {
     res.setHeader('Cache-Control', 'no-store');
     const cookies = Object.fromEntries((req.headers.cookie || '').split(';').map(s => s.trim().split('=')));
@@ -86,7 +91,8 @@ function createApp({ client, databasePath, configured } = {}) {
     res.on('close', () => { if (!res.writableEnded) abort.abort(); });
     const emit = data => res.write(`data: ${JSON.stringify(data)}\n\n`);
     try {
-      const messages = [...history(id), { role: 'user', content: message.trim() }];
+      const messages = await prepareAnswer({ provider, model, sakila, signal: abort.signal,
+        messages: [...history(id), { role: 'user', content: message.trim() }] });
       const result = await provider.chat.completions.create({ model, messages, stream, max_tokens: 2048 }, { signal: abort.signal });
       let reply = '';
       if (stream) {
@@ -126,7 +132,7 @@ function createApp({ client, databasePath, configured } = {}) {
     if (res.headersSent) return next(error);
     res.status(error.status === 413 ? 413 : 400).json({ error: 'Solicitud inválida o demasiado grande.' });
   });
-  app.locals.close = () => { clearInterval(cleanup); db.close(); };
+  app.locals.close = async () => { clearInterval(cleanup); db.close(); if (sakila) await sakila.close(); };
   return app;
 }
 

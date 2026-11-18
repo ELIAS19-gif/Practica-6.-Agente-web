@@ -13,7 +13,7 @@ async function setup(t, options = {}) {
     })();
     return { choices: [{ message: { content: 'Hola mundo' } }] };
   } } } };
-  const app = createApp({ databasePath: ':memory:', client, configured: options.configured ?? true });
+  const app = createApp({ databasePath: ':memory:', client, configured: options.configured ?? true, sakila: null });
   const server = app.listen(0, '127.0.0.1');
   await new Promise(resolve => server.once('listening', resolve));
   t.after(async () => { await new Promise(resolve => server.close(resolve)); app.locals.close(); });
